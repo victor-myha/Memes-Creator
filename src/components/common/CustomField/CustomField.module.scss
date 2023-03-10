@@ -1,0 +1,9 @@
+@import "../../../assets/colors";
+
+.field {
+  background-color: $light-black;
+
+  input {
+    color: $white;
+  }
+}

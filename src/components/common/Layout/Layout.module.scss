@@ -1,0 +1,13 @@
+@import '../../../assets/colors';
+
+.layoutWrapper {
+  font-family: Satoshi;
+  background: $black-bg;
+  display: flex;
+  flex-direction: column;
+
+  .mainContent {
+    margin-top: 120px;
+    height: 100vh;
+  }
+}

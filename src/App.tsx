@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
-function App() {
+import Auth from './components/Authorization/Auth';
+import Categories from './components/Categories/Categories';
+import Error404 from './components/Error404/Error404';
+
+const App = () => {
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    navigate('/');
+  }, [isAuthenticated]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        path='/'
+        element={isAuthenticated ? <Navigate to='/categories' /> : <Navigate to='/auth' />}
+      />
+      <Route
+        path='/auth'
+        element={<Auth isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
+      />
+      <Route path='/categories' element={<Categories isAuthenticated={isAuthenticated} />} />
+      <Route path={'*'} element={<Error404 />} />
+    </Routes>
   );
-}
+};
 
 export default App;

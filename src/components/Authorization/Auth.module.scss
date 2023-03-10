@@ -1,0 +1,14 @@
+@import '../../assets/colors';
+
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .form {
+    width: 100%;
+    max-width: 748px;
+  }
+}
