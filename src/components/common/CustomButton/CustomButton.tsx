@@ -1,8 +1,10 @@
 import { Button, SxProps, Theme } from '@mui/material';
 import Box from '@mui/material/Box';
+import { CSSProperties } from 'react';
 
 type ButtonProps = {
   text: string;
+  icon?: JSX.Element;
   type?: 'submit' | 'button' | 'reset';
   onClick?: () => void;
   color?: 'primary' | 'inherit' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
@@ -10,11 +12,13 @@ type ButtonProps = {
   gradient?: boolean;
   loading?: boolean;
   disabled?: boolean;
-  styles?: SxProps<Theme>;
+  boxStyles?: SxProps<Theme>;
+  buttonStyles?: CSSProperties;
 };
 const CustomButton = (props: ButtonProps) => {
   const {
     text,
+    icon,
     type = 'submit',
     onClick,
     color = 'primary',
@@ -22,10 +26,11 @@ const CustomButton = (props: ButtonProps) => {
     gradient,
     loading,
     disabled,
-    styles,
+    boxStyles,
+    buttonStyles,
   } = props;
   return (
-    <Box sx={styles ? styles : { position: 'relative' }}>
+    <Box sx={boxStyles ? boxStyles : { position: 'relative' }}>
       <Button
         type={type}
         fullWidth
@@ -42,9 +47,10 @@ const CustomButton = (props: ButtonProps) => {
                 borderRadius: '4px',
                 textTransform: 'none',
               }
-            : { textTransform: 'none' }
+            : { ...buttonStyles, textTransform: 'none' }
         }
       >
+        {icon}
         {text}
       </Button>
     </Box>

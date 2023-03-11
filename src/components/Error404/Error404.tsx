@@ -10,7 +10,10 @@ const Error404 = () => {
         backgroundColor: '#333039',
       }}
     >
-      <img src='https://i.pinimg.com/564x/9f/7e/f0/9f7ef05e51ca5b71e284d479d1a16652.jpg' alt='error404' />
+      <img
+        src='https://i.pinimg.com/564x/9f/7e/f0/9f7ef05e51ca5b71e284d479d1a16652.jpg'
+        alt='error404'
+      />
     </div>
   );
 };

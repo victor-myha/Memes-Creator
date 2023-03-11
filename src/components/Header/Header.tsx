@@ -1,3 +1,4 @@
+import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import { Button, InputAdornment } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -53,7 +54,7 @@ const Header = ({ isAuthenticated }: HeaderProps) => {
               inputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <SearchIcon color={'disabled'} />
+                    <SearchIcon style={{ color: '#9B9D9F' }} />
                   </InputAdornment>
                 ),
               }}
@@ -67,7 +68,11 @@ const Header = ({ isAuthenticated }: HeaderProps) => {
               alignItems: 'center',
             }}
           >
-            <CustomButton text={'Add a New Meme'} gradient />
+            <CustomButton
+              text={'Add a New Meme'}
+              gradient
+              icon={<AddIcon style={{ marginRight: 7 }} />}
+            />
             <Button
               variant='text'
               style={{ color: '#9B9D9F', textTransform: 'none', marginLeft: '24px' }}

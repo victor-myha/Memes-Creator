@@ -68,7 +68,8 @@ const CustomField = (props: FieldProps) => {
       helperText={helperText}
       error={error}
       style={style}
-      InputProps={inputProps}
+      //TODO
+      InputProps={{ ...inputProps, style: { height: '50px' } }}
     />
   );
 };
