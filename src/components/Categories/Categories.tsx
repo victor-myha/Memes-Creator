@@ -1,16 +1,18 @@
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
-import * as React from 'react';
-import { CSSProperties, useEffect, useState } from 'react';
+import { CSSProperties, useState } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { Category } from '../../utils/commonTypes';
 import { idGenerator } from '../../utils/helpers';
 import CustomButton from '../common/CustomButton/CustomButton';
 import CustomModal from '../common/CustomModal/CustomModal';
 import Layout from '../common/Layout/Layout';
-import CategoryItem from './CategoryItem/CategoryItem';
+import './Categories.css';
+import DraggableList from './DraggableList/DraggableList';
 
 type CategoriesProps = {
   isAuthenticated: boolean;
@@ -48,11 +50,6 @@ const Categories = ({ isAuthenticated }: CategoriesProps) => {
   const [idToDelete, setIdToDelete] = useState<string>();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  // TODO del it
-  useEffect(() => {
-    console.log('categoriesArr', categoriesArr);
-  }, [categoriesArr]);
-
   const handleCreateCategory = () => {
     const newCategory: Category = {
       id: idGenerator(),
@@ -67,6 +64,7 @@ const Categories = ({ isAuthenticated }: CategoriesProps) => {
       return [...prev];
     });
   };
+
   const handleDelete = () => {
     setCategoriesArr((prev: Category[]) => prev.filter(category => category.id !== idToDelete));
     setOpenDeleteModal(false);
@@ -108,14 +106,14 @@ const Categories = ({ isAuthenticated }: CategoriesProps) => {
             onClick={handleCreateCategory}
           />
 
-          {categoriesArr.map(category => (
-            <CategoryItem
-              key={category.id}
-              category={category}
+          <DndProvider backend={HTML5Backend}>
+            <DraggableList
+              categories={categoriesArr}
               setOpenDeleteModal={setOpenDeleteModal}
               setIdToDelete={setIdToDelete}
+              setCategoriesArr={setCategoriesArr}
             />
-          ))}
+          </DndProvider>
         </Box>
 
         <CustomModal

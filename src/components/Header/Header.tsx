@@ -1,5 +1,5 @@
-import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
 import { Button, InputAdornment } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useFormik } from 'formik';

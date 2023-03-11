@@ -7,7 +7,8 @@ import Error404 from './components/Error404/Error404';
 
 const App = () => {
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // TODO change isAuthenticated to false before sending
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     navigate('/');

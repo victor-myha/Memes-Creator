@@ -1,28 +1,26 @@
-import { TextField } from '@material-ui/core';
-import { Theme, withStyles } from '@material-ui/core/styles';
+import { TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { CSSProperties, ChangeEvent } from 'react';
 
 import styles from './CustomField.module.scss';
 
-const CustomTextField = withStyles((theme: Theme) => ({
-  root: {
-    '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#323443',
-    },
-    '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#323443',
-    },
-    '&.Mui-focused .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#323443',
-    },
-    '& label.Mui-focused': {
-      color: '#9B9D9F',
-    },
-    '& label': {
-      color: '#9B9D9F',
-    },
+export const CustomTextField = styled(TextField)(() => ({
+  '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+    borderColor: '#323443',
   },
-}))(TextField);
+  '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+    borderColor: '#323443',
+  },
+  '&.Mui-focused .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+    borderColor: '#323443',
+  },
+  '& label.Mui-focused': {
+    color: '#9B9D9F',
+  },
+  '& label': {
+    color: '#9B9D9F',
+  },
+}));
 
 type FieldProps = {
   value: string;
@@ -36,6 +34,7 @@ type FieldProps = {
   helperText?: string | false | undefined;
   className?: string;
   style?: CSSProperties;
+  hiddenLabel?: boolean;
   inputProps?: any;
 };
 
@@ -52,6 +51,7 @@ const CustomField = (props: FieldProps) => {
     type,
     helperText,
     error,
+    hiddenLabel,
     inputProps,
   } = props;
   return (
@@ -68,8 +68,9 @@ const CustomField = (props: FieldProps) => {
       helperText={helperText}
       error={error}
       style={style}
-      //TODO
-      InputProps={{ ...inputProps, style: { height: '50px' } }}
+      hiddenLabel={hiddenLabel}
+      //TODO style --> height
+      InputProps={{ ...inputProps }}
     />
   );
 };

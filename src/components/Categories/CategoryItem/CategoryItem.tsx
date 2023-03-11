@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 
 import { Category } from '../../../utils/commonTypes';
 import { generateValidationSchema } from '../../../utils/helpers';
-import styles from '../../Authorization/Auth.module.scss';
 import CustomizedSwitches from '../../common/Switch/Switch';
 
 interface FormValues {
@@ -57,17 +56,29 @@ const CategoryItem = (props: CategoryItemProps) => {
       }}
     >
       {category.newCategory ? (
-        <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
+          {/*<CustomField*/}
+          {/*  fullWidth*/}
+          {/*  hiddenLabel*/}
+          {/*  id='categoryName'*/}
+          {/*  name='categoryName'*/}
+          {/*  label='categoryName'*/}
+          {/*  value={formik.values.categoryName}*/}
+          {/*  onChange={formik.handleChange}*/}
+          {/*  error={formik.touched.categoryName && Boolean(formik.errors.categoryName)}*/}
+          {/*  helperText={formik.touched.categoryName && formik.errors.categoryName}*/}
+          {/*  style={{}}*/}
+          {/*/>*/}
           <TextField
             hiddenLabel
             id='categoryName'
-            name={'categoryName'}
-            defaultValue='Normal'
+            name='categoryName'
             variant='filled'
+            value={formik.values.categoryName}
+            onChange={formik.handleChange}
             onKeyDown={event => {
-              if (event.key === 'Enter') {
+              if (event.key === 'enter') {
                 event.preventDefault();
-                // event.target.blur();
               }
             }}
           />
