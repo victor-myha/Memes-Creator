@@ -8,7 +8,7 @@ import Error404 from './components/Error404/Error404';
 const App = () => {
   const navigate = useNavigate();
   // TODO change isAuthenticated to false before sending
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     navigate('/');
@@ -24,7 +24,12 @@ const App = () => {
         path='/auth'
         element={<Auth isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
       />
-      <Route path='/categories' element={<Categories isAuthenticated={isAuthenticated} />} />
+      <Route
+        path='/categories'
+        element={
+          <Categories isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+        }
+      />
       <Route path={'*'} element={<Error404 />} />
     </Routes>
   );

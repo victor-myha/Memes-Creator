@@ -12,6 +12,7 @@ import styles from './Header.module.scss';
 
 type HeaderProps = {
   isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
 };
 
 interface FormValues {
@@ -22,7 +23,7 @@ const initialValues: FormValues = {
   searchMeme: '',
 };
 
-const Header = ({ isAuthenticated }: HeaderProps) => {
+const Header = ({ isAuthenticated, setIsAuthenticated }: HeaderProps) => {
   const formik = useFormik({
     initialValues,
     validationSchema: generateValidationSchema(['name'], ['searchMeme']),
@@ -51,6 +52,7 @@ const Header = ({ isAuthenticated }: HeaderProps) => {
               error={formik.touched.searchMeme && Boolean(formik.errors.searchMeme)}
               helperText={formik.touched.searchMeme && formik.errors.searchMeme}
               style={{ width: '380px' }}
+              inputStyle={{ height: '50px', background: '#30313C' }}
               inputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
@@ -72,10 +74,12 @@ const Header = ({ isAuthenticated }: HeaderProps) => {
               text={'Add a New Meme'}
               gradient
               icon={<AddIcon style={{ marginRight: 7 }} />}
+              buttonStyles={{ fontWeight: 700, fontSize: '14px' }}
             />
             <Button
               variant='text'
               style={{ color: '#9B9D9F', textTransform: 'none', marginLeft: '24px' }}
+              onClick={() => setIsAuthenticated(false)}
             >
               Log Out
             </Button>

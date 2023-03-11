@@ -11,11 +11,11 @@ import { idGenerator } from '../../utils/helpers';
 import CustomButton from '../common/CustomButton/CustomButton';
 import CustomModal from '../common/CustomModal/CustomModal';
 import Layout from '../common/Layout/Layout';
-import './Categories.css';
 import DraggableList from './DraggableList/DraggableList';
 
 type CategoriesProps = {
   isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
 };
 
 const categories: Category[] = [
@@ -45,7 +45,7 @@ const categories: Category[] = [
   },
 ];
 
-const Categories = ({ isAuthenticated }: CategoriesProps) => {
+const Categories = ({ isAuthenticated, setIsAuthenticated }: CategoriesProps) => {
   const [categoriesArr, setCategoriesArr] = useState<Category[]>(categories);
   const [idToDelete, setIdToDelete] = useState<string>();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -71,7 +71,7 @@ const Categories = ({ isAuthenticated }: CategoriesProps) => {
   };
 
   return (
-    <Layout isAuthenticated={isAuthenticated}>
+    <Layout isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}>
       <>
         <Box>
           <Button variant='text' style={buttonTextStyle}>
@@ -101,6 +101,9 @@ const Categories = ({ isAuthenticated }: CategoriesProps) => {
               maxWidth: '638px',
               height: '50px',
               background: '#884DFE',
+              fontWeight: 700,
+              fontSize: '16px',
+              lineHeight: '18px',
             }}
             icon={<AddIcon style={{ marginRight: 7 }} />}
             onClick={handleCreateCategory}
@@ -126,7 +129,7 @@ const Categories = ({ isAuthenticated }: CategoriesProps) => {
               setOpenDeleteModal={setOpenDeleteModal}
             />
           }
-          modalStyle={{ maxWidth: '336px' }}
+          modalStyle={{ maxWidth: '336px', padding: '32px 24px' }}
         />
       </>
     </Layout>
@@ -157,8 +160,8 @@ const DeleteModalContent = ({
       <CustomButton
         text={'Delete'}
         gradient={true}
-        buttonStyles={{ height: '58px' }}
-        icon={<DeleteIcon style={{ marginRight: 7, width: '14px' }} />}
+        buttonStyles={{ height: '58px', fontWeight: 700, fontSize: '16px', lineHeight: '18px' }}
+        icon={<DeleteIcon style={{ marginRight: 7, width: '18px' }} />}
         onClick={handleDelete}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>

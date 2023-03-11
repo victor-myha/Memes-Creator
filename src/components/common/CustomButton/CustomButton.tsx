@@ -41,6 +41,7 @@ const CustomButton = (props: ButtonProps) => {
         style={
           gradient
             ? {
+                ...buttonStyles,
                 position: 'relative',
                 background: 'linear-gradient(104.43deg, #A139FD 11.26%, #50BDFC 90.79%)',
                 backdropFilter: 'blur(20px)',

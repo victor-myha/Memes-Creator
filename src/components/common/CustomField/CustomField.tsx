@@ -36,6 +36,7 @@ type FieldProps = {
   style?: CSSProperties;
   hiddenLabel?: boolean;
   inputProps?: any;
+  inputStyle?: CSSProperties;
 };
 
 const CustomField = (props: FieldProps) => {
@@ -53,6 +54,7 @@ const CustomField = (props: FieldProps) => {
     error,
     hiddenLabel,
     inputProps,
+    inputStyle,
   } = props;
   return (
     <CustomTextField
@@ -70,7 +72,7 @@ const CustomField = (props: FieldProps) => {
       style={style}
       hiddenLabel={hiddenLabel}
       //TODO style --> height
-      InputProps={{ ...inputProps }}
+      InputProps={{ ...inputProps, style: inputStyle }}
     />
   );
 };

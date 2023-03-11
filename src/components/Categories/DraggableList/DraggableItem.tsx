@@ -6,6 +6,7 @@ import CategoryItem from '../CategoryItem/CategoryItem';
 
 type CategoryItemProps = {
   category: Category;
+  setCategoriesArr: (value: Category[]) => void;
   index: number;
   setIdToDelete: (value: string) => void;
   setOpenDeleteModal: (value: boolean) => void;
@@ -13,7 +14,7 @@ type CategoryItemProps = {
 };
 
 const DraggableItem = (props: CategoryItemProps) => {
-  const { category, setIdToDelete, setOpenDeleteModal, moveCard, index } = props;
+  const { category, setCategoriesArr, setIdToDelete, setOpenDeleteModal, moveCard, index } = props;
 
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
@@ -89,6 +90,7 @@ const DraggableItem = (props: CategoryItemProps) => {
         category={category}
         setOpenDeleteModal={setOpenDeleteModal}
         setIdToDelete={setIdToDelete}
+        setCategoriesArr={setCategoriesArr}
       />
     </div>
   );

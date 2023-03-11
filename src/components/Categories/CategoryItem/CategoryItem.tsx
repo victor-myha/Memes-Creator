@@ -1,42 +1,35 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
-import { IconButton, TextField } from '@mui/material';
+import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
-import { useFormik } from 'formik';
+import { useState } from 'react';
 
 import { Category } from '../../../utils/commonTypes';
-import { generateValidationSchema } from '../../../utils/helpers';
 import CustomizedSwitches from '../../common/Switch/Switch';
-
-interface FormValues {
-  categoryName: string;
-}
-
-const initialValues: FormValues = {
-  categoryName: '',
-};
 
 type CategoryItemProps = {
   category: Category;
+  setCategoriesArr: (value: any) => void;
   setIdToDelete: (value: string) => void;
   setOpenDeleteModal: (value: boolean) => void;
 };
 
 const CategoryItem = (props: CategoryItemProps) => {
-  const { category, setIdToDelete, setOpenDeleteModal } = props;
+  const { category, setCategoriesArr, setIdToDelete, setOpenDeleteModal } = props;
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema: generateValidationSchema(['name'], ['categoryName']),
-    onSubmit: ({ categoryName }, actions) => {
-      console.log('categoryName', categoryName);
-      actions.resetForm();
-    },
-  });
+  const [categoryValue, setCategoryValue] = useState('');
 
   const handleDelete = (id: string) => {
     setIdToDelete(id);
     setOpenDeleteModal(true);
+  };
+
+  const handleAddCategory = () => {
+    setCategoriesArr((prev: Category[]) => {
+      const index = prev.findIndex(item => item.id === category.id);
+      prev.splice(index, 1, { ...category, name: categoryValue, newCategory: false });
+      return [...prev];
+    });
   };
 
   return (
@@ -56,33 +49,23 @@ const CategoryItem = (props: CategoryItemProps) => {
       }}
     >
       {category.newCategory ? (
-        <form onSubmit={formik.handleSubmit}>
-          {/*<CustomField*/}
-          {/*  fullWidth*/}
-          {/*  hiddenLabel*/}
-          {/*  id='categoryName'*/}
-          {/*  name='categoryName'*/}
-          {/*  label='categoryName'*/}
-          {/*  value={formik.values.categoryName}*/}
-          {/*  onChange={formik.handleChange}*/}
-          {/*  error={formik.touched.categoryName && Boolean(formik.errors.categoryName)}*/}
-          {/*  helperText={formik.touched.categoryName && formik.errors.categoryName}*/}
-          {/*  style={{}}*/}
-          {/*/>*/}
-          <TextField
-            hiddenLabel
-            id='categoryName'
-            name='categoryName'
-            variant='filled'
-            value={formik.values.categoryName}
-            onChange={formik.handleChange}
-            onKeyDown={event => {
-              if (event.key === 'enter') {
-                event.preventDefault();
-              }
-            }}
-          />
-        </form>
+        <input
+          type='text'
+          placeholder={'Enter Category Name'}
+          value={categoryValue}
+          onChange={event => setCategoryValue(event.target.value)}
+          style={{ background: 'transparent', border: 0, outline: 'none', color: '#FFFFFF' }}
+          onKeyDown={event => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              handleAddCategory();
+            }
+          }}
+          onBlur={event => {
+            event.preventDefault();
+            handleAddCategory();
+          }}
+        />
       ) : (
         <div
           style={{
@@ -110,7 +93,7 @@ const CategoryItem = (props: CategoryItemProps) => {
         </div>
         <CustomizedSwitches checked={category.status === 'on'} />
         <IconButton onClick={() => handleDelete(category.id)}>
-          <DeleteIcon style={{ color: '#9B9D9F' }} />
+          <DeleteIcon style={{ color: '#9B9D9F', width: '20px', height: '18px' }} />
         </IconButton>
         <IconButton>
           <DragIndicatorIcon style={{ color: '#9B9D9F' }} />

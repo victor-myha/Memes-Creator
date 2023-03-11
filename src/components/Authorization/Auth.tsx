@@ -1,5 +1,4 @@
 import { useFormik } from 'formik';
-import { useState } from 'react';
 
 import { generateValidationSchema } from '../../utils/helpers';
 import CustomButton from '../common/CustomButton/CustomButton';
@@ -25,13 +24,9 @@ const initialValues: FormValues = {
 const Auth = (props: AuthProps) => {
   const { isAuthenticated, setIsAuthenticated } = props;
 
-  const [authType, setAuthType] = useState<'login' | 'signUp'>('login');
-
   const formik = useFormik({
     initialValues,
-    validationSchema: generateValidationSchema(
-      authType === 'login' ? ['email', 'password'] : ['email', 'password', 'confirmPassword']
-    ),
+    validationSchema: generateValidationSchema(['email', 'password']),
     onSubmit: ({ email, password }, actions) => {
       setIsAuthenticated(true);
       actions.resetForm();
@@ -39,7 +34,7 @@ const Auth = (props: AuthProps) => {
   });
 
   return (
-    <Layout isAuthenticated={isAuthenticated}>
+    <Layout isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}>
       <div className={styles.formContainer}>
         <form className={styles.form} onSubmit={formik.handleSubmit}>
           <CustomField
@@ -65,7 +60,12 @@ const Auth = (props: AuthProps) => {
             style={{ margin: '12px 0' }}
           />
 
-          <CustomButton text={'Sign In'} gradient />
+          <CustomButton
+            text={'Sign In'}
+            gradient
+            boxStyles={{ display: 'flex', justifyContent: 'center' }}
+            buttonStyles={{ width: '179px' }}
+          />
         </form>
       </div>
     </Layout>

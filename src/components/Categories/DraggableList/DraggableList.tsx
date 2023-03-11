@@ -4,10 +4,6 @@ import { useCallback } from 'react';
 import { Category } from '../../../utils/commonTypes';
 import DraggableItem from './DraggableItem';
 
-const style = {
-  width: 400,
-};
-
 type DraggableListProps = {
   categories: Category[];
   setCategoriesArr: (value: any) => void;
@@ -37,13 +33,16 @@ const DraggableList = (props: DraggableListProps) => {
         moveCard={moveCard}
         setOpenDeleteModal={setOpenDeleteModal}
         setIdToDelete={setIdToDelete}
+        setCategoriesArr={setCategoriesArr}
       />
     );
   }, []);
 
   return (
     <>
-      <div style={style}>{categories.map((category, i) => renderCard(category, i))}</div>
+      <div style={{ width: '100%', maxWidth: '638px' }}>
+        {categories.map((category, i) => renderCard(category, i))}
+      </div>
     </>
   );
 };
