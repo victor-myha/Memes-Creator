@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { useFormik } from 'formik';
 
 import logoSvg from '../../assets/img/logo.svg';
+import { SetState } from '../../utils/commonTypes';
 import { generateValidationSchema } from '../../utils/helpers';
 import CustomButton from '../common/CustomButton/CustomButton';
 import CustomField from '../common/CustomField/CustomField';
@@ -12,7 +13,7 @@ import styles from './Header.module.scss';
 
 type HeaderProps = {
   isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
+  setIsAuthenticated: SetState<boolean>;
 };
 
 interface FormValues {
@@ -28,7 +29,6 @@ const Header = ({ isAuthenticated, setIsAuthenticated }: HeaderProps) => {
     initialValues,
     validationSchema: generateValidationSchema(['name'], ['searchMeme']),
     onSubmit: ({ searchMeme }, actions) => {
-      console.log('searchMeme', searchMeme);
       actions.resetForm();
     },
   });

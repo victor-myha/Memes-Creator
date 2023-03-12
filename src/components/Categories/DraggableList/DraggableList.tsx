@@ -1,20 +1,21 @@
 import update from 'immutability-helper';
 import { useCallback } from 'react';
 
-import { Category } from '../../../utils/commonTypes';
+import { Category, SetState } from '../../../utils/commonTypes';
 import DraggableItem from './DraggableItem';
 
 type DraggableListProps = {
   categories: Category[];
-  setCategoriesArr: (value: any) => void;
-  setIdToDelete: (value: string) => void;
-  setOpenDeleteModal: (value: boolean) => void;
+  setCategoriesArr: SetState<Category[]>;
+  setIdToDelete: SetState<string>;
+  setOpenDeleteModal: SetState<boolean>;
 };
+
 const DraggableList = (props: DraggableListProps) => {
   const { categories, setCategoriesArr, setIdToDelete, setOpenDeleteModal } = props;
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-    setCategoriesArr((prevCards: Category[]) =>
+    setCategoriesArr(prevCards =>
       update(prevCards, {
         $splice: [
           [dragIndex, 1],

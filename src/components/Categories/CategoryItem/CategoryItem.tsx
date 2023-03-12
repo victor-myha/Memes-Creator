@@ -4,14 +4,14 @@ import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
 
-import { Category } from '../../../utils/commonTypes';
-import CustomizedSwitches from '../../common/Switch/Switch';
+import { Category, SetState } from '../../../utils/commonTypes';
+import CustomSwitcher from '../../common/Switch/CustomSwitcher';
 
 type CategoryItemProps = {
   category: Category;
-  setCategoriesArr: (value: any) => void;
-  setIdToDelete: (value: string) => void;
-  setOpenDeleteModal: (value: boolean) => void;
+  setCategoriesArr: SetState<Category[]>;
+  setIdToDelete: SetState<string>;
+  setOpenDeleteModal: SetState<boolean>;
 };
 
 const CategoryItem = (props: CategoryItemProps) => {
@@ -25,7 +25,7 @@ const CategoryItem = (props: CategoryItemProps) => {
   };
 
   const handleAddCategory = () => {
-    setCategoriesArr((prev: Category[]) => {
+    setCategoriesArr(prev => {
       const index = prev.findIndex(item => item.id === category.id);
       prev.splice(index, 1, { ...category, name: categoryValue, newCategory: false });
       return [...prev];
@@ -91,10 +91,13 @@ const CategoryItem = (props: CategoryItemProps) => {
         >
           {category.counter}
         </div>
-        <CustomizedSwitches checked={category.status === 'on'} />
+
+        <CustomSwitcher category={category} setCategoriesArr={setCategoriesArr} />
+
         <IconButton onClick={() => handleDelete(category.id)}>
           <DeleteIcon style={{ color: '#9B9D9F', width: '20px', height: '18px' }} />
         </IconButton>
+
         <IconButton>
           <DragIndicatorIcon style={{ color: '#9B9D9F' }} />
         </IconButton>

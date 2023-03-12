@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { CSSProperties } from 'react';
 
+import { SetState } from '../../../utils/commonTypes';
+
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -19,7 +21,7 @@ const style = {
 
 type CustomModalProps = {
   open: boolean;
-  setOpen: (value: boolean) => void;
+  setOpen: SetState<boolean>;
   title: string;
   modalContent: JSX.Element;
   modalStyle?: CSSProperties;

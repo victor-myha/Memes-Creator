@@ -6,7 +6,7 @@ import { CSSProperties, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { Category } from '../../utils/commonTypes';
+import { Category, SetState } from '../../utils/commonTypes';
 import { idGenerator } from '../../utils/helpers';
 import CustomButton from '../common/CustomButton/CustomButton';
 import CustomModal from '../common/CustomModal/CustomModal';
@@ -15,7 +15,7 @@ import DraggableList from './DraggableList/DraggableList';
 
 type CategoriesProps = {
   isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
+  setIsAuthenticated: SetState<boolean>;
 };
 
 const categories: Category[] = [
@@ -47,7 +47,7 @@ const categories: Category[] = [
 
 const Categories = ({ isAuthenticated, setIsAuthenticated }: CategoriesProps) => {
   const [categoriesArr, setCategoriesArr] = useState<Category[]>(categories);
-  const [idToDelete, setIdToDelete] = useState<string>();
+  const [idToDelete, setIdToDelete] = useState<string>('');
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const handleCreateCategory = () => {
@@ -58,15 +58,14 @@ const Categories = ({ isAuthenticated, setIsAuthenticated }: CategoriesProps) =>
       status: 'on',
       newCategory: true,
     };
-    setCategoriesArr((prev: Category[]) => {
+    setCategoriesArr(prev => {
       prev.unshift(newCategory);
-      console.log('prev', [...prev]);
       return [...prev];
     });
   };
 
   const handleDelete = () => {
-    setCategoriesArr((prev: Category[]) => prev.filter(category => category.id !== idToDelete));
+    setCategoriesArr(prev => prev.filter(category => category.id !== idToDelete));
     setOpenDeleteModal(false);
   };
 
@@ -141,7 +140,7 @@ const DeleteModalContent = ({
   setOpenDeleteModal,
 }: {
   handleDelete: () => void;
-  setOpenDeleteModal: (value: boolean) => void;
+  setOpenDeleteModal: SetState<boolean>;
 }) => {
   return (
     <Box>

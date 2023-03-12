@@ -1,12 +1,13 @@
 import { ThemeProvider, createTheme } from '@mui/material';
 
+import { SetState } from '../../../utils/commonTypes';
 import Header from '../../Header/Header';
 import styles from './Layout.module.scss';
 
 type LayoutProps = {
   isAuthenticated?: boolean;
   children: JSX.Element;
-  setIsAuthenticated: (value: boolean) => void;
+  setIsAuthenticated: SetState<boolean>;
 };
 
 const theme = createTheme({

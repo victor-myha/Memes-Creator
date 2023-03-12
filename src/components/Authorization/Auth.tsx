@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 
+import { SetState } from '../../utils/commonTypes';
 import { generateValidationSchema } from '../../utils/helpers';
 import CustomButton from '../common/CustomButton/CustomButton';
 import CustomField from '../common/CustomField/CustomField';
@@ -8,7 +9,7 @@ import styles from './Auth.module.scss';
 
 type AuthProps = {
   isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
+  setIsAuthenticated: SetState<boolean>;
 };
 
 interface FormValues {

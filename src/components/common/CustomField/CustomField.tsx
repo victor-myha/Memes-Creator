@@ -71,7 +71,6 @@ const CustomField = (props: FieldProps) => {
       error={error}
       style={style}
       hiddenLabel={hiddenLabel}
-      //TODO style --> height
       InputProps={{ ...inputProps, style: inputStyle }}
     />
   );
