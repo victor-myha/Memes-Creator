@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Memes-Creator/static/css/main.2f86859d.css",
+    "main.js": "/Memes-Creator/static/js/main.040ff990.js",
+    "static/js/787.5b3e19a2.chunk.js": "/Memes-Creator/static/js/787.5b3e19a2.chunk.js",
+    "static/media/Satoshi.ttf": "/Memes-Creator/static/media/Satoshi.536fda9b164542087fc7.ttf",
+    "static/media/logo.svg": "/Memes-Creator/static/media/logo.b96b463f240574031bf71154eaddf516.svg",
+    "index.html": "/Memes-Creator/index.html",
+    "main.2f86859d.css.map": "/Memes-Creator/static/css/main.2f86859d.css.map",
+    "main.040ff990.js.map": "/Memes-Creator/static/js/main.040ff990.js.map",
+    "787.5b3e19a2.chunk.js.map": "/Memes-Creator/static/js/787.5b3e19a2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2f86859d.css",
+    "static/js/main.040ff990.js"
+  ]
+}
